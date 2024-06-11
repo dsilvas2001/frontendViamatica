@@ -1,0 +1,192 @@
+<section>
+  <div class="contenderForm">
+    <h3 class="title text-center">Registro</h3>
+    <form [formGroup]="registerForm" (ngSubmit)="addUser()">
+      <div class="form-group">
+        <label for="exampleInputNames">Nombres</label>
+        <input
+          type="tex"
+          class="form-control"
+          id="exampleInputNames"
+          placeholder="Ingrese sus Nombres"
+          formControlName="nombres"
+        />
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('nombres')?.hasError('required') &&
+            registerForm.get('nombres')?.touched
+          "
+        >
+          <span>El nombre es obligatorio</span>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="registerForm.get('nombres')?.errors?.['pattern'] &&
+        registerForm.get('nombres')?.touched"
+        >
+          El nombre no debe contener números ni caracteres especiales
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputLastName">Apellidos</label>
+        <input
+          type="tex"
+          class="form-control"
+          id="exampleInputLastName"
+          placeholder="Ingrese sus Apellidos"
+          formControlName="apellidos"
+        />
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('apellidos')?.hasError('required') &&
+            registerForm.get('apellidos')?.touched
+          "
+        >
+          <span>El Apellido es obligatorio</span>
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="registerForm.get('apellidos')?.errors?.['pattern'] &&
+      registerForm.get('apellidos')?.touched"
+        >
+          El apellido no debe contener números ni caracteres especiales
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputCI">Identificacion</label>
+        <input
+          type="number"
+          class="form-control"
+          id="exampleInputCI"
+          placeholder="Ingrese su Identificacion"
+          formControlName="identificacion"
+        />
+        <div
+          class="text-danger"
+          *ngIf="registerForm.get('identificacion')?.hasError('required')"
+        >
+          La identificación es requerida.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="registerForm.get('identificacion')?.hasError('maxLength')"
+        >
+          La identificación debe tener máximo 10 dígitos.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="registerForm.get('identificacion')?.hasError('pattern')"
+        >
+          La identificación debe contener solo números y tener exactamente 10
+          dígitos.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('identificacion')?.hasError('noCuatroSeguidos')
+          "
+        >
+          La identificación no puede tener 4 números seguidos.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputUsername">Usuario</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputUsername"
+          placeholder="Ingrese el Usuario"
+          formControlName="username"
+        />
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('username')?.hasError('required') &&
+            registerForm.get('username')?.touched
+          "
+        >
+          El nombre de usuario es obligatorio.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('username')?.hasError('pattern') &&
+            registerForm.get('username')?.touched
+          "
+        >
+          El nombre de usuario no debe contener signos y debe tener al menos una
+          letra mayúscula y un número. La longitud debe estar entre 8 y 20
+          caracteres.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword">Contraseña</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputPassword"
+          placeholder="Ingrese la Contraseña"
+          formControlName="password"
+        />
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('password')?.hasError('required') &&
+            registerForm.get('password')?.touched
+          "
+        >
+          La contraseña es requerida.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('password')?.hasError('minlength') &&
+            registerForm.get('password')?.touched
+          "
+        >
+          La contraseña debe tener al menos 8 dígitos.
+        </div>
+        <div
+          class="text-danger"
+          *ngIf="
+            registerForm.get('password')?.hasError('pattern') &&
+            registerForm.get('password')?.touched
+          "
+        >
+          La contraseña debe tener al menos una letra mayúscula, un número y un
+          signo (como !#$%^&*), sin espacios en blanco.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail">Email Generado:</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail"
+          aria-describedby="emailHelp"
+          placeholder="Correo generado automáticamente"
+          [value]="correoGenerado"
+          formControlName="email"
+          readonly
+        />
+        <small id="emailHelp" class="form-text text-muted">
+          Este correo se generará automáticamente.
+        </small>
+      </div>
+      <div class="text-center">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="registerForm.invalid"
+        >
+          Submit
+        </button>
+        <button routerLink="/" class="btn btn-info">Volver</button>
+      </div>
+    </form>
+  </div>
+</section>
